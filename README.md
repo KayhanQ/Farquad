@@ -1,1 +1,1 @@
-# Farquad
+# Farquad: drone + projector + flappy bird
