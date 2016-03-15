@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1AA97A21C977B7E00CC8AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97A11C977B7E00CC8AFC /* AppDelegate.swift */; };
+		F1AA97A41C977B7E00CC8AFC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97A31C977B7E00CC8AFC /* GameScene.swift */; };
+		F1AA97A61C977B7E00CC8AFC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F1AA97A51C977B7E00CC8AFC /* GameScene.sks */; };
+		F1AA97A81C977B7F00CC8AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1AA97A71C977B7F00CC8AFC /* Assets.xcassets */; };
+		F1AA97AB1C977B7F00CC8AFC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1AA97A91C977B7F00CC8AFC /* MainMenu.xib */; };
+		F1AA97B61C977B7F00CC8AFC /* FarquadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97B51C977B7F00CC8AFC /* FarquadTests.swift */; };
+		F1AA97C11C977B7F00CC8AFC /* FarquadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97C01C977B7F00CC8AFC /* FarquadUITests.swift */; };
+		F1AA97D01C977C6400CC8AFC /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97CF1C977C6400CC8AFC /* MainScene.swift */; };
+		F1AA97D21C977D4C00CC8AFC /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D11C977D4C00CC8AFC /* Obstacle.swift */; };
+		F1AA97D41C977FB100CC8AFC /* ObstacleCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D31C977FB100CC8AFC /* ObstacleCollection.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1AA97B21C977B7F00CC8AFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1AA97961C977B7E00CC8AFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1AA979D1C977B7E00CC8AFC;
+			remoteInfo = Farquad;
+		};
+		F1AA97BD1C977B7F00CC8AFC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1AA97961C977B7E00CC8AFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1AA979D1C977B7E00CC8AFC;
+			remoteInfo = Farquad;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1AA979E1C977B7E00CC8AFC /* Farquad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Farquad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AA97A11C977B7E00CC8AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1AA97A31C977B7E00CC8AFC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		F1AA97A51C977B7E00CC8AFC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		F1AA97A71C977B7F00CC8AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1AA97AA1C977B7F00CC8AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F1AA97AC1C977B7F00CC8AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1AA97B11C977B7F00CC8AFC /* FarquadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarquadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AA97B51C977B7F00CC8AFC /* FarquadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarquadTests.swift; sourceTree = "<group>"; };
+		F1AA97B71C977B7F00CC8AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1AA97BC1C977B7F00CC8AFC /* FarquadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarquadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AA97C01C977B7F00CC8AFC /* FarquadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarquadUITests.swift; sourceTree = "<group>"; };
+		F1AA97C21C977B7F00CC8AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1AA97CF1C977C6400CC8AFC /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		F1AA97D11C977D4C00CC8AFC /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		F1AA97D31C977FB100CC8AFC /* ObstacleCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleCollection.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1AA979B1C977B7E00CC8AFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AA97AE1C977B7F00CC8AFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AA97B91C977B7F00CC8AFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1AA97951C977B7E00CC8AFC = {
+			isa = PBXGroup;
+			children = (
+				F1AA97A01C977B7E00CC8AFC /* Farquad */,
+				F1AA97B41C977B7F00CC8AFC /* FarquadTests */,
+				F1AA97BF1C977B7F00CC8AFC /* FarquadUITests */,
+				F1AA979F1C977B7E00CC8AFC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1AA979F1C977B7E00CC8AFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA979E1C977B7E00CC8AFC /* Farquad.app */,
+				F1AA97B11C977B7F00CC8AFC /* FarquadTests.xctest */,
+				F1AA97BC1C977B7F00CC8AFC /* FarquadUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1AA97A01C977B7E00CC8AFC /* Farquad */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA97A11C977B7E00CC8AFC /* AppDelegate.swift */,
+				F1AA97A31C977B7E00CC8AFC /* GameScene.swift */,
+				F1AA97CF1C977C6400CC8AFC /* MainScene.swift */,
+				F1AA97D31C977FB100CC8AFC /* ObstacleCollection.swift */,
+				F1AA97D11C977D4C00CC8AFC /* Obstacle.swift */,
+				F1AA97CE1C977BF900CC8AFC /* Misc */,
+			);
+			path = Farquad;
+			sourceTree = "<group>";
+		};
+		F1AA97B41C977B7F00CC8AFC /* FarquadTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA97B51C977B7F00CC8AFC /* FarquadTests.swift */,
+				F1AA97B71C977B7F00CC8AFC /* Info.plist */,
+			);
+			path = FarquadTests;
+			sourceTree = "<group>";
+		};
+		F1AA97BF1C977B7F00CC8AFC /* FarquadUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA97C01C977B7F00CC8AFC /* FarquadUITests.swift */,
+				F1AA97C21C977B7F00CC8AFC /* Info.plist */,
+			);
+			path = FarquadUITests;
+			sourceTree = "<group>";
+		};
+		F1AA97CE1C977BF900CC8AFC /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA97A51C977B7E00CC8AFC /* GameScene.sks */,
+				F1AA97A71C977B7F00CC8AFC /* Assets.xcassets */,
+				F1AA97A91C977B7F00CC8AFC /* MainMenu.xib */,
+				F1AA97AC1C977B7F00CC8AFC /* Info.plist */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1AA979D1C977B7E00CC8AFC /* Farquad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1AA97C51C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "Farquad" */;
+			buildPhases = (
+				F1AA979A1C977B7E00CC8AFC /* Sources */,
+				F1AA979B1C977B7E00CC8AFC /* Frameworks */,
+				F1AA979C1C977B7E00CC8AFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Farquad;
+			productName = Farquad;
+			productReference = F1AA979E1C977B7E00CC8AFC /* Farquad.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1AA97B01C977B7F00CC8AFC /* FarquadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1AA97C81C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "FarquadTests" */;
+			buildPhases = (
+				F1AA97AD1C977B7F00CC8AFC /* Sources */,
+				F1AA97AE1C977B7F00CC8AFC /* Frameworks */,
+				F1AA97AF1C977B7F00CC8AFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1AA97B31C977B7F00CC8AFC /* PBXTargetDependency */,
+			);
+			name = FarquadTests;
+			productName = FarquadTests;
+			productReference = F1AA97B11C977B7F00CC8AFC /* FarquadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F1AA97BB1C977B7F00CC8AFC /* FarquadUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1AA97CB1C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "FarquadUITests" */;
+			buildPhases = (
+				F1AA97B81C977B7F00CC8AFC /* Sources */,
+				F1AA97B91C977B7F00CC8AFC /* Frameworks */,
+				F1AA97BA1C977B7F00CC8AFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1AA97BE1C977B7F00CC8AFC /* PBXTargetDependency */,
+			);
+			name = FarquadUITests;
+			productName = FarquadUITests;
+			productReference = F1AA97BC1C977B7F00CC8AFC /* FarquadUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1AA97961C977B7E00CC8AFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Paddy Crab";
+				TargetAttributes = {
+					F1AA979D1C977B7E00CC8AFC = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					F1AA97B01C977B7F00CC8AFC = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = F1AA979D1C977B7E00CC8AFC;
+					};
+					F1AA97BB1C977B7F00CC8AFC = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = F1AA979D1C977B7E00CC8AFC;
+					};
+				};
+			};
+			buildConfigurationList = F1AA97991C977B7E00CC8AFC /* Build configuration list for PBXProject "Farquad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1AA97951C977B7E00CC8AFC;
+			productRefGroup = F1AA979F1C977B7E00CC8AFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1AA979D1C977B7E00CC8AFC /* Farquad */,
+				F1AA97B01C977B7F00CC8AFC /* FarquadTests */,
+				F1AA97BB1C977B7F00CC8AFC /* FarquadUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1AA979C1C977B7E00CC8AFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AA97A81C977B7F00CC8AFC /* Assets.xcassets in Resources */,
+				F1AA97A61C977B7E00CC8AFC /* GameScene.sks in Resources */,
+				F1AA97AB1C977B7F00CC8AFC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AA97AF1C977B7F00CC8AFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AA97BA1C977B7F00CC8AFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1AA979A1C977B7E00CC8AFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AA97D01C977C6400CC8AFC /* MainScene.swift in Sources */,
+				F1AA97A41C977B7E00CC8AFC /* GameScene.swift in Sources */,
+				F1AA97D41C977FB100CC8AFC /* ObstacleCollection.swift in Sources */,
+				F1AA97D21C977D4C00CC8AFC /* Obstacle.swift in Sources */,
+				F1AA97A21C977B7E00CC8AFC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AA97AD1C977B7F00CC8AFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AA97B61C977B7F00CC8AFC /* FarquadTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AA97B81C977B7F00CC8AFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AA97C11C977B7F00CC8AFC /* FarquadUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1AA97B31C977B7F00CC8AFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1AA979D1C977B7E00CC8AFC /* Farquad */;
+			targetProxy = F1AA97B21C977B7F00CC8AFC /* PBXContainerItemProxy */;
+		};
+		F1AA97BE1C977B7F00CC8AFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1AA979D1C977B7E00CC8AFC /* Farquad */;
+			targetProxy = F1AA97BD1C977B7F00CC8AFC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1AA97A91C977B7F00CC8AFC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1AA97AA1C977B7F00CC8AFC /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1AA97C31C977B7F00CC8AFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1AA97C41C977B7F00CC8AFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F1AA97C61C977B7F00CC8AFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Farquad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.Farquad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F1AA97C71C977B7F00CC8AFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Farquad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.Farquad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F1AA97C91C977B7F00CC8AFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = FarquadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.FarquadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Farquad.app/Contents/MacOS/Farquad";
+			};
+			name = Debug;
+		};
+		F1AA97CA1C977B7F00CC8AFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FarquadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.FarquadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Farquad.app/Contents/MacOS/Farquad";
+			};
+			name = Release;
+		};
+		F1AA97CC1C977B7F00CC8AFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = FarquadUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.FarquadUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Farquad;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		F1AA97CD1C977B7F00CC8AFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FarquadUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.FarquadUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Farquad;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1AA97991C977B7E00CC8AFC /* Build configuration list for PBXProject "Farquad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AA97C31C977B7F00CC8AFC /* Debug */,
+				F1AA97C41C977B7F00CC8AFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1AA97C51C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "Farquad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AA97C61C977B7F00CC8AFC /* Debug */,
+				F1AA97C71C977B7F00CC8AFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1AA97C81C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "FarquadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AA97C91C977B7F00CC8AFC /* Debug */,
+				F1AA97CA1C977B7F00CC8AFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1AA97CB1C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "FarquadUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AA97CC1C977B7F00CC8AFC /* Debug */,
+				F1AA97CD1C977B7F00CC8AFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1AA97961C977B7E00CC8AFC /* Project object */;
+}
