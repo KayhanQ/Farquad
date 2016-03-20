@@ -19,14 +19,18 @@ class ObstacleCollection: SKNode {
     var velocity:CGFloat = 0
 
     var direction = 1
-    var caveHeight: CGFloat = 400
-    var caveHeightDelta: CGFloat = -0.04
+    var caveHeight: CGFloat = 600
+    var caveHeightDelta: CGFloat = -0.01
+    var minCaveHeight: CGFloat = 450
+    
+    var obsHeightDelta: CGFloat = 5
+    
     var minBotH: CGFloat = 10
-    var maxBotH: CGFloat = 80
+    var maxBotH: CGFloat = 120
 
     var botHeight: CGFloat = 50
     
-    var middleObsHeight: CGFloat = 160
+    var middleObsHeight: CGFloat = 140
     
     var wallCount = 0
     var numWallsBetweenMiddles = 35
@@ -53,15 +57,35 @@ class ObstacleCollection: SKNode {
             }
         }
         
-        caveHeight += caveHeightDelta
+        if caveHeight > minCaveHeight {
+            caveHeight += caveHeightDelta
+        }
+
+        if Int.random(10) == 0 {
+            obsHeightDelta = CGFloat.random(min: 4, max: 10)
+        }
+        maxBotH = screenHeight - caveHeight - 10
     }
     
     func addNext() {
-        if botHeight > maxBotH || botHeight < minBotH {
+        var tmpBotHeight:CGFloat = botHeight
+        
+        if Int.random(20) == 0 {
+            tmpBotHeight += CGFloat.random(min: 40, max: 80)
+        }
+        
+        tmpBotHeight += obsHeightDelta * CGFloat(direction)
+        
+        if tmpBotHeight < maxBotH && tmpBotHeight > minBotH {
+            botHeight = tmpBotHeight
+            if Int.random(10) == 0 {
+                direction *= -1
+            }
+        }
+        else {
             direction *= -1
         }
         
-        botHeight += deltaH * CGFloat(direction)
         
         let x: CGFloat = getLastX() + obWidth - velocity
         let bot = Obstacle(x: x, y: 0, width: obWidth, height: botHeight)
@@ -78,6 +102,7 @@ class ObstacleCollection: SKNode {
         
         if wallCount >= numWallsBetweenMiddles {
             let buffer:CGFloat = 10
+            //crashed app
             let y = CGFloat.random(min: bot.position.y + botHeight + buffer, max: top.position.y-middleObsHeight-buffer)
             
             let middle = Obstacle(x: bot.position.x, y: y, width: obWidth, height: middleObsHeight)
