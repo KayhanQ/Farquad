@@ -17,6 +17,22 @@
 		F1AA97D01C977C6400CC8AFC /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97CF1C977C6400CC8AFC /* MainScene.swift */; };
 		F1AA97D21C977D4C00CC8AFC /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D11C977D4C00CC8AFC /* Obstacle.swift */; };
 		F1AA97D41C977FB100CC8AFC /* ObstacleCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D31C977FB100CC8AFC /* ObstacleCollection.swift */; };
+		F1AA97E21C9F002000CC8AFC /* SKPhysicsBody+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D51C9F002000CC8AFC /* SKPhysicsBody+Extensions.swift */; };
+		F1AA97E31C9F002000CC8AFC /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D61C9F002000CC8AFC /* CGFloat+Extensions.swift */; };
+		F1AA97E41C9F002000CC8AFC /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D71C9F002000CC8AFC /* CGPoint+Extensions.swift */; };
+		F1AA97E51C9F002000CC8AFC /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D81C9F002000CC8AFC /* CGVector+Extensions.swift */; };
+		F1AA97E61C9F002000CC8AFC /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97D91C9F002000CC8AFC /* Int+Extensions.swift */; };
+		F1AA97E71C9F002000CC8AFC /* SKAction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97DA1C9F002000CC8AFC /* SKAction+Extensions.swift */; };
+		F1AA97E81C9F002000CC8AFC /* SKAction+SpecialEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97DB1C9F002000CC8AFC /* SKAction+SpecialEffects.swift */; };
+		F1AA97E91C9F002000CC8AFC /* SKColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97DC1C9F002000CC8AFC /* SKColor+Extensions.swift */; };
+		F1AA97EA1C9F002000CC8AFC /* SKNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97DD1C9F002000CC8AFC /* SKNode+Extensions.swift */; };
+		F1AA97EB1C9F002000CC8AFC /* SKTAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97DE1C9F002000CC8AFC /* SKTAudio.swift */; };
+		F1AA97EC1C9F002000CC8AFC /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97DF1C9F002000CC8AFC /* SKTEffects.swift */; };
+		F1AA97ED1C9F002000CC8AFC /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97E01C9F002000CC8AFC /* SKTTimingFunctions.swift */; };
+		F1AA97EE1C9F002000CC8AFC /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97E11C9F002000CC8AFC /* Vector3.swift */; };
+		F1AA980F1C9F167800CC8AFC /* CPP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AA980C1C9F167800CC8AFC /* CPP.cpp */; };
+		F1AA98101C9F167800CC8AFC /* CPP-Wrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1AA980E1C9F167800CC8AFC /* CPP-Wrapper.mm */; };
+		F1AA98141C9F184500CC8AFC /* C.c in Sources */ = {isa = PBXBuildFile; fileRef = F1AA98131C9F184500CC8AFC /* C.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +69,26 @@
 		F1AA97CF1C977C6400CC8AFC /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		F1AA97D11C977D4C00CC8AFC /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 		F1AA97D31C977FB100CC8AFC /* ObstacleCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleCollection.swift; sourceTree = "<group>"; };
+		F1AA97D51C9F002000CC8AFC /* SKPhysicsBody+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKPhysicsBody+Extensions.swift"; path = "../SKPhysicsBody+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97D61C9F002000CC8AFC /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGFloat+Extensions.swift"; path = "../CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97D71C9F002000CC8AFC /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGPoint+Extensions.swift"; path = "../CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97D81C9F002000CC8AFC /* CGVector+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGVector+Extensions.swift"; path = "../CGVector+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97D91C9F002000CC8AFC /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Int+Extensions.swift"; path = "../Int+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97DA1C9F002000CC8AFC /* SKAction+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKAction+Extensions.swift"; path = "../SKAction+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97DB1C9F002000CC8AFC /* SKAction+SpecialEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKAction+SpecialEffects.swift"; path = "../SKAction+SpecialEffects.swift"; sourceTree = "<group>"; };
+		F1AA97DC1C9F002000CC8AFC /* SKColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKColor+Extensions.swift"; path = "../SKColor+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97DD1C9F002000CC8AFC /* SKNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SKNode+Extensions.swift"; path = "../SKNode+Extensions.swift"; sourceTree = "<group>"; };
+		F1AA97DE1C9F002000CC8AFC /* SKTAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKTAudio.swift; path = ../SKTAudio.swift; sourceTree = "<group>"; };
+		F1AA97DF1C9F002000CC8AFC /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKTEffects.swift; path = ../SKTEffects.swift; sourceTree = "<group>"; };
+		F1AA97E01C9F002000CC8AFC /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKTTimingFunctions.swift; path = ../SKTTimingFunctions.swift; sourceTree = "<group>"; };
+		F1AA97E11C9F002000CC8AFC /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vector3.swift; path = ../Vector3.swift; sourceTree = "<group>"; };
+		F1AA980B1C9F167800CC8AFC /* CPP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CPP.hpp; sourceTree = "<group>"; };
+		F1AA980C1C9F167800CC8AFC /* CPP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CPP.cpp; sourceTree = "<group>"; };
+		F1AA980D1C9F167800CC8AFC /* CPP-Wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPP-Wrapper.h"; sourceTree = "<group>"; };
+		F1AA980E1C9F167800CC8AFC /* CPP-Wrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "CPP-Wrapper.mm"; sourceTree = "<group>"; };
+		F1AA98111C9F16A900CC8AFC /* Farquad-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Farquad-Bridging-Header.h"; sourceTree = "<group>"; };
+		F1AA98121C9F184500CC8AFC /* C.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C.h; sourceTree = "<group>"; };
+		F1AA98131C9F184500CC8AFC /* C.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = C.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +144,9 @@
 				F1AA97CF1C977C6400CC8AFC /* MainScene.swift */,
 				F1AA97D31C977FB100CC8AFC /* ObstacleCollection.swift */,
 				F1AA97D11C977D4C00CC8AFC /* Obstacle.swift */,
+				F1AA98151C9F188300CC8AFC /* Collision Dectector */,
+				F1AA98111C9F16A900CC8AFC /* Farquad-Bridging-Header.h */,
+				F1AA97EF1C9F002800CC8AFC /* SKUtils */,
 				F1AA97CE1C977BF900CC8AFC /* Misc */,
 			);
 			path = Farquad;
@@ -140,6 +179,39 @@
 				F1AA97AC1C977B7F00CC8AFC /* Info.plist */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		F1AA97EF1C9F002800CC8AFC /* SKUtils */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA97D51C9F002000CC8AFC /* SKPhysicsBody+Extensions.swift */,
+				F1AA97D61C9F002000CC8AFC /* CGFloat+Extensions.swift */,
+				F1AA97D71C9F002000CC8AFC /* CGPoint+Extensions.swift */,
+				F1AA97D81C9F002000CC8AFC /* CGVector+Extensions.swift */,
+				F1AA97D91C9F002000CC8AFC /* Int+Extensions.swift */,
+				F1AA97DA1C9F002000CC8AFC /* SKAction+Extensions.swift */,
+				F1AA97DB1C9F002000CC8AFC /* SKAction+SpecialEffects.swift */,
+				F1AA97DC1C9F002000CC8AFC /* SKColor+Extensions.swift */,
+				F1AA97DD1C9F002000CC8AFC /* SKNode+Extensions.swift */,
+				F1AA97DE1C9F002000CC8AFC /* SKTAudio.swift */,
+				F1AA97DF1C9F002000CC8AFC /* SKTEffects.swift */,
+				F1AA97E01C9F002000CC8AFC /* SKTTimingFunctions.swift */,
+				F1AA97E11C9F002000CC8AFC /* Vector3.swift */,
+			);
+			name = SKUtils;
+			sourceTree = "<group>";
+		};
+		F1AA98151C9F188300CC8AFC /* Collision Dectector */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA98121C9F184500CC8AFC /* C.h */,
+				F1AA98131C9F184500CC8AFC /* C.c */,
+				F1AA980B1C9F167800CC8AFC /* CPP.hpp */,
+				F1AA980C1C9F167800CC8AFC /* CPP.cpp */,
+				F1AA980D1C9F167800CC8AFC /* CPP-Wrapper.h */,
+				F1AA980E1C9F167800CC8AFC /* CPP-Wrapper.mm */,
+			);
+			name = "Collision Dectector";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,10 +346,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1AA97D01C977C6400CC8AFC /* MainScene.swift in Sources */,
+				F1AA97ED1C9F002000CC8AFC /* SKTTimingFunctions.swift in Sources */,
+				F1AA97E21C9F002000CC8AFC /* SKPhysicsBody+Extensions.swift in Sources */,
+				F1AA98101C9F167800CC8AFC /* CPP-Wrapper.mm in Sources */,
+				F1AA97E51C9F002000CC8AFC /* CGVector+Extensions.swift in Sources */,
+				F1AA97E41C9F002000CC8AFC /* CGPoint+Extensions.swift in Sources */,
+				F1AA97E31C9F002000CC8AFC /* CGFloat+Extensions.swift in Sources */,
 				F1AA97A41C977B7E00CC8AFC /* GameScene.swift in Sources */,
+				F1AA97EB1C9F002000CC8AFC /* SKTAudio.swift in Sources */,
 				F1AA97D41C977FB100CC8AFC /* ObstacleCollection.swift in Sources */,
+				F1AA980F1C9F167800CC8AFC /* CPP.cpp in Sources */,
+				F1AA97EA1C9F002000CC8AFC /* SKNode+Extensions.swift in Sources */,
+				F1AA98141C9F184500CC8AFC /* C.c in Sources */,
+				F1AA97E71C9F002000CC8AFC /* SKAction+Extensions.swift in Sources */,
+				F1AA97E81C9F002000CC8AFC /* SKAction+SpecialEffects.swift in Sources */,
 				F1AA97D21C977D4C00CC8AFC /* Obstacle.swift in Sources */,
 				F1AA97A21C977B7E00CC8AFC /* AppDelegate.swift in Sources */,
+				F1AA97EC1C9F002000CC8AFC /* SKTEffects.swift in Sources */,
+				F1AA97E61C9F002000CC8AFC /* Int+Extensions.swift in Sources */,
+				F1AA97EE1C9F002000CC8AFC /* Vector3.swift in Sources */,
+				F1AA97E91C9F002000CC8AFC /* SKColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,11 +496,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Farquad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.Farquad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Farquad/Farquad-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -420,11 +512,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Farquad/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.paddycrab.Farquad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Farquad/Farquad-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -20,11 +20,16 @@ class ObstacleCollection: SKNode {
 
     var direction = 1
     var caveHeight: CGFloat = 400
-    var deltaH: CGFloat = 8.6
+    var caveHeightDelta: CGFloat = -0.04
     var minBotH: CGFloat = 10
     var maxBotH: CGFloat = 80
 
     var botHeight: CGFloat = 50
+    
+    var middleObsHeight: CGFloat = 160
+    
+    var wallCount = 0
+    var numWallsBetweenMiddles = 35
     
     override init() {
         super.init()
@@ -38,37 +43,54 @@ class ObstacleCollection: SKNode {
     }
     
     func update() {
-        for obs in self.children {
+        for obs in self.children as! [Obstacle] {
             obs.position.x -= velocity
             if obs.position.x < 0 {
                 obs.removeFromParent()
-                if obs.name == "top" {
+                if obs.type == Obstacle.ObsType.WallTop {
                     addNext()
                 }
             }
-
         }
-    }
-
-    func addNext() {
-        //let topY = getLastY()
         
+        caveHeight += caveHeightDelta
+    }
+    
+    func addNext() {
         if botHeight > maxBotH || botHeight < minBotH {
             direction *= -1
         }
         
         botHeight += deltaH * CGFloat(direction)
         
-        let bot = Obstacle(x: screenWidth, y: 0, width: obWidth, height: botHeight)
-        bot.name = "bot"
+        let x: CGFloat = getLastX() + obWidth - velocity
+        let bot = Obstacle(x: x, y: 0, width: obWidth, height: botHeight)
+        bot.type = Obstacle.ObsType.WallBot
         self.addChild(bot)
         
         let topHeight = screenHeight - caveHeight - botHeight
-        let top = Obstacle(x: screenWidth, y: screenHeight-topHeight, width: obWidth, height: topHeight)
-        top.name = "top"
+        let top = Obstacle(x: bot.position.x, y: screenHeight-topHeight, width: obWidth, height: topHeight)
+        top.type = Obstacle.ObsType.WallTop
         self.addChild(top)
         
+        
+        wallCount++
+        
+        if wallCount >= numWallsBetweenMiddles {
+            let buffer:CGFloat = 10
+            let y = CGFloat.random(min: bot.position.y + botHeight + buffer, max: top.position.y-middleObsHeight-buffer)
+            
+            let middle = Obstacle(x: bot.position.x, y: y, width: obWidth, height: middleObsHeight)
+            middle.type = Obstacle.ObsType.Middle
+            self.addChild(middle)
+            
+            wallCount = 0
+        }
 
+    }
+    
+    func getLastX() -> CGFloat {
+        return (self.children.last?.position.x)!
     }
     
     func getLastY() -> CGFloat {
@@ -86,11 +108,11 @@ class ObstacleCollection: SKNode {
         
         for _ in 1...numObstaclesInRow {
             let obsBot = Obstacle(x:x, y: 0, width: obWidth, height: botHeight)
-            obsBot.name = "bot"
+            obsBot.type = Obstacle.ObsType.WallBot
             self.addChild(obsBot)
             
             let obsTop = Obstacle(x:x, y: screenHeight-botHeight, width: obWidth, height: botHeight)
-            obsTop.name = "top"
+            obsTop.type = Obstacle.ObsType.WallTop
             self.addChild(obsTop)
             x = x + obWidth
         }
@@ -98,21 +120,5 @@ class ObstacleCollection: SKNode {
         caveHeight = screenHeight - botHeight * 2
     }
     
-    
-//    func populate(var x: CGFloat, y: CGFloat) {
-//        var array = [Obstacle]()
-//        
-//        array.append(Obstacle(x:x, y:y, width: obWidth, height: obHeight))
-//
-//        for _ in 1...numObstaclesInRow {
-//            x = x + obWidth
-//            let obs = Obstacle(x:x, y:y, width: obWidth, height: obHeight)
-//            array.append(obs)
-//        }
-//        
-//        for obs in array {
-//            self.addChild(obs)
-//        }
-//    }
-    
+
 }

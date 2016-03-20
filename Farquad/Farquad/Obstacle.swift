@@ -13,11 +13,21 @@ class Obstacle: SKNode {
     
     var leftGoalX: CGFloat!
     var rightGoalX: CGFloat!
+    var type = ObsType.None
+    
+    var rect: SKShapeNode!
+    
+    enum ObsType {
+        case None
+        case WallTop
+        case WallBot
+        case Middle
+    }
     
     init(x:CGFloat, y:CGFloat, width: CGFloat, height: CGFloat) {
         super.init()
         
-        let rect = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: height))
+        rect = SKShapeNode(rect: CGRect(x: 0, y: 0, width: width, height: height))
         rect.fillColor = NSColor.whiteColor()
         self.addChild(rect)
         
@@ -26,6 +36,10 @@ class Obstacle: SKNode {
         //rect.physicsBody = SKPhysicsBody(rectangleOfSize: rect.frame.size)
         //setup()
         
+    }
+    
+    func setColor(color: NSColor) {
+        rect.fillColor = color
     }
     
     func setup() {

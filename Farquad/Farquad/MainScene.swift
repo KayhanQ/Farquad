@@ -27,7 +27,7 @@ class MainScene: SKScene {
     
     func setup() {
         self.addChild(obstacles)
-        obstacles.velocity = 1
+        obstacles.velocity = 5
     }
     
     override func didMoveToView(view: SKView) {
@@ -40,8 +40,17 @@ class MainScene: SKScene {
         
         
         setup()
+        
+        testBridge()
+        
     }
 
+    func testBridge() {
+        CPP_Wrapper().helloWorld_cpp_wrapped()
+        //CPP_Wrapper().hello_cpp_wrapped("Hello everyone")
+        
+        print("Collided is \(CPP_Wrapper().hasCollided_wrapped())")
+    }
     
     override func update(currentTime: NSTimeInterval) {
 
