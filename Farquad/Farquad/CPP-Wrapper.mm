@@ -44,5 +44,13 @@
     return cpp.hasCollided();
 }
 
+- (NSString*)getQuadBox_wrapped {
+    CPP cpp;
+    std::string string = cpp.getQuadBox();
+    
+    NSString* result = [NSString stringWithUTF8String: string.c_str()];
+    return result;
+}
+
 
 @end

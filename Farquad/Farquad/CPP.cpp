@@ -28,6 +28,13 @@
 #include "C.h"
 #include <iostream>
 
+#include <fcntl.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+#define MAX_BUF 1024
+
 using namespace std;
 
 void CPP::helloWorld_cpp() {
@@ -39,6 +46,23 @@ void CPP::hello_cpp(const std::string& name) {
     cout << "Hello " << name << " in C++" << endl;
 }
 
+
 int CPP::hasCollided() {
     return 1;
+}
+
+std::string CPP::getQuadBox() {
+    int fd;
+    const char *myfifo = "/tmp/quadData";
+    char buf[MAX_BUF];
+    
+    /* open, read, and display the message from the FIFO */
+    fd = open(myfifo, O_RDONLY);
+    if (fd != -1) {
+        read(fd, buf, MAX_BUF);
+        close(fd);
+        return buf;
+    }
+    
+    return "";
 }

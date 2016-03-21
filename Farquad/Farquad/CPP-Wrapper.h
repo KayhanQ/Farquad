@@ -31,5 +31,6 @@
 - (void)hello_cpp_wrapped:(NSString *)name;
 
 - (int)hasCollided_wrapped;
+- (NSString*)getQuadBox_wrapped;
 
 @end

@@ -32,5 +32,6 @@ public:
     void helloWorld_cpp();
     void hello_cpp(const std::string& name);
     int hasCollided();
+    std::string getQuadBox();
 
 };
