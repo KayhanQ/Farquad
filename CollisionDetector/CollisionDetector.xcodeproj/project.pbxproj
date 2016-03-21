@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F108E5BD1C9F7C5E00326EB9 /* libopencv_core.2.4.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F108E5BC1C9F7C5E00326EB9 /* libopencv_core.2.4.12.dylib */; };
+		F108E5BF1C9F7CA100326EB9 /* libopencv_highgui.2.4.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F108E5BE1C9F7CA100326EB9 /* libopencv_highgui.2.4.12.dylib */; };
+		F108E5C11C9F7CC400326EB9 /* libopencv_imgproc.2.4.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F108E5C01C9F7CC400326EB9 /* libopencv_imgproc.2.4.12.dylib */; };
+		F108E5C31C9F7CE700326EB9 /* libopencv_features2d.2.4.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F108E5C21C9F7CE700326EB9 /* libopencv_features2d.2.4.12.dylib */; };
+		F1AA98261C9F7A9200CC8AFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AA98251C9F7A9200CC8AFC /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F1AA98201C9F7A9200CC8AFC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F108E5BC1C9F7C5E00326EB9 /* libopencv_core.2.4.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.2.4.12.dylib; path = "../../../../Libraries/opencv-2.4.12/build/lib/libopencv_core.2.4.12.dylib"; sourceTree = "<group>"; };
+		F108E5BE1C9F7CA100326EB9 /* libopencv_highgui.2.4.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.2.4.12.dylib; path = "../../../../Libraries/opencv-2.4.12/build/lib/libopencv_highgui.2.4.12.dylib"; sourceTree = "<group>"; };
+		F108E5C01C9F7CC400326EB9 /* libopencv_imgproc.2.4.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.2.4.12.dylib; path = "../../../../Libraries/opencv-2.4.12/build/lib/libopencv_imgproc.2.4.12.dylib"; sourceTree = "<group>"; };
+		F108E5C21C9F7CE700326EB9 /* libopencv_features2d.2.4.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_features2d.2.4.12.dylib; path = "../../../../Libraries/opencv-2.4.12/build/lib/libopencv_features2d.2.4.12.dylib"; sourceTree = "<group>"; };
+		F1AA98221C9F7A9200CC8AFC /* CollisionDetector */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CollisionDetector; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AA98251C9F7A9200CC8AFC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1AA981F1C9F7A9200CC8AFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F108E5C31C9F7CE700326EB9 /* libopencv_features2d.2.4.12.dylib in Frameworks */,
+				F108E5BD1C9F7C5E00326EB9 /* libopencv_core.2.4.12.dylib in Frameworks */,
+				F108E5BF1C9F7CA100326EB9 /* libopencv_highgui.2.4.12.dylib in Frameworks */,
+				F108E5C11C9F7CC400326EB9 /* libopencv_imgproc.2.4.12.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1AA98191C9F7A9100CC8AFC = {
+			isa = PBXGroup;
+			children = (
+				F108E5C21C9F7CE700326EB9 /* libopencv_features2d.2.4.12.dylib */,
+				F108E5C01C9F7CC400326EB9 /* libopencv_imgproc.2.4.12.dylib */,
+				F108E5BE1C9F7CA100326EB9 /* libopencv_highgui.2.4.12.dylib */,
+				F108E5BC1C9F7C5E00326EB9 /* libopencv_core.2.4.12.dylib */,
+				F1AA98241C9F7A9200CC8AFC /* CollisionDetector */,
+				F1AA98231C9F7A9200CC8AFC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1AA98231C9F7A9200CC8AFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA98221C9F7A9200CC8AFC /* CollisionDetector */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1AA98241C9F7A9200CC8AFC /* CollisionDetector */ = {
+			isa = PBXGroup;
+			children = (
+				F1AA98251C9F7A9200CC8AFC /* main.cpp */,
+			);
+			path = CollisionDetector;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1AA98211C9F7A9200CC8AFC /* CollisionDetector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1AA98291C9F7A9200CC8AFC /* Build configuration list for PBXNativeTarget "CollisionDetector" */;
+			buildPhases = (
+				F1AA981E1C9F7A9200CC8AFC /* Sources */,
+				F1AA981F1C9F7A9200CC8AFC /* Frameworks */,
+				F1AA98201C9F7A9200CC8AFC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CollisionDetector;
+			productName = CollisionDetector;
+			productReference = F1AA98221C9F7A9200CC8AFC /* CollisionDetector */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1AA981A1C9F7A9200CC8AFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Paddy Crab";
+				TargetAttributes = {
+					F1AA98211C9F7A9200CC8AFC = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = F1AA981D1C9F7A9200CC8AFC /* Build configuration list for PBXProject "CollisionDetector" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F1AA98191C9F7A9100CC8AFC;
+			productRefGroup = F1AA98231C9F7A9200CC8AFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1AA98211C9F7A9200CC8AFC /* CollisionDetector */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1AA981E1C9F7A9200CC8AFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AA98261C9F7A9200CC8AFC /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F1AA98271C9F7A9200CC8AFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F1AA98281C9F7A9200CC8AFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F1AA982A1C9F7A9200CC8AFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = /usr/local/lib;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = "/Users/kayhanacs/Filing-2016/Programming/Libraries/opencv-2.4.12/build/lib";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F1AA982B1C9F7A9200CC8AFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				FRAMEWORK_SEARCH_PATHS = /usr/local/lib;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = "/Users/kayhanacs/Filing-2016/Programming/Libraries/opencv-2.4.12/build/lib";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1AA981D1C9F7A9200CC8AFC /* Build configuration list for PBXProject "CollisionDetector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AA98271C9F7A9200CC8AFC /* Debug */,
+				F1AA98281C9F7A9200CC8AFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1AA98291C9F7A9200CC8AFC /* Build configuration list for PBXNativeTarget "CollisionDetector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AA982A1C9F7A9200CC8AFC /* Debug */,
+				F1AA982B1C9F7A9200CC8AFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1AA981A1C9F7A9200CC8AFC /* Project object */;
+}
