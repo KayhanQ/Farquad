@@ -21,9 +21,11 @@ class GameScene: SKScene {
     
     override func mouseDown(theEvent: NSEvent) {
         
-        let secondScene = MainScene(size: self.size)
+        //let secondScene = MainScene(size: self.size)
+        let secondScene = SpaceScene(size: CGSize(width: 1024, height: 768))
+        
         let transition = SKTransition.flipVerticalWithDuration(1.0)
-        secondScene.scaleMode = SKSceneScaleMode.AspectFill
+        secondScene.scaleMode = SKSceneScaleMode.AspectFit
         self.scene!.view?.presentScene(secondScene, transition: transition)
         
         

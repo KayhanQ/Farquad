@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F108E5C61CA0C21900326EB9 /* SpaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F108E5C51CA0C21900326EB9 /* SpaceScene.swift */; };
+		F108E5F11CA0C2DB00326EB9 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F108E5F01CA0C2DB00326EB9 /* GameOverScene.swift */; };
+		F108E6221CA0C85200326EB9 /* InvaderA_00.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6211CA0C85200326EB9 /* InvaderA_00.png */; };
+		F108E6241CA0C85E00326EB9 /* InvaderA_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6231CA0C85E00326EB9 /* InvaderA_01.png */; };
+		F108E62A1CA0CA9300326EB9 /* InvaderB_00.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6251CA0CA9300326EB9 /* InvaderB_00.png */; };
+		F108E62B1CA0CA9300326EB9 /* InvaderB_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6261CA0CA9300326EB9 /* InvaderB_01.png */; };
+		F108E62C1CA0CA9300326EB9 /* InvaderC_00.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6271CA0CA9300326EB9 /* InvaderC_00.png */; };
+		F108E62D1CA0CA9300326EB9 /* InvaderC_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6281CA0CA9300326EB9 /* InvaderC_01.png */; };
+		F108E62E1CA0CA9300326EB9 /* Ship.png in Resources */ = {isa = PBXBuildFile; fileRef = F108E6291CA0CA9300326EB9 /* Ship.png */; };
 		F1AA97A21C977B7E00CC8AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97A11C977B7E00CC8AFC /* AppDelegate.swift */; };
 		F1AA97A41C977B7E00CC8AFC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AA97A31C977B7E00CC8AFC /* GameScene.swift */; };
 		F1AA97A61C977B7E00CC8AFC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F1AA97A51C977B7E00CC8AFC /* GameScene.sks */; };
@@ -53,6 +62,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F108E5C51CA0C21900326EB9 /* SpaceScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceScene.swift; sourceTree = "<group>"; };
+		F108E5F01CA0C2DB00326EB9 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		F108E6211CA0C85200326EB9 /* InvaderA_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderA_00.png; sourceTree = "<group>"; };
+		F108E6231CA0C85E00326EB9 /* InvaderA_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderA_01.png; sourceTree = "<group>"; };
+		F108E6251CA0CA9300326EB9 /* InvaderB_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderB_00.png; sourceTree = "<group>"; };
+		F108E6261CA0CA9300326EB9 /* InvaderB_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderB_01.png; sourceTree = "<group>"; };
+		F108E6271CA0CA9300326EB9 /* InvaderC_00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderC_00.png; sourceTree = "<group>"; };
+		F108E6281CA0CA9300326EB9 /* InvaderC_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvaderC_01.png; sourceTree = "<group>"; };
+		F108E6291CA0CA9300326EB9 /* Ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ship.png; sourceTree = "<group>"; };
 		F1AA979E1C977B7E00CC8AFC /* Farquad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Farquad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1AA97A11C977B7E00CC8AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1AA97A31C977B7E00CC8AFC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -116,9 +134,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F108E5C41CA0C1F100326EB9 /* Space Invaders */ = {
+			isa = PBXGroup;
+			children = (
+				F108E6201CA0C83A00326EB9 /* Assets */,
+				F108E5C51CA0C21900326EB9 /* SpaceScene.swift */,
+				F108E5F01CA0C2DB00326EB9 /* GameOverScene.swift */,
+			);
+			name = "Space Invaders";
+			path = Farquad;
+			sourceTree = "<group>";
+		};
+		F108E6201CA0C83A00326EB9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F108E6211CA0C85200326EB9 /* InvaderA_00.png */,
+				F108E6231CA0C85E00326EB9 /* InvaderA_01.png */,
+				F108E6251CA0CA9300326EB9 /* InvaderB_00.png */,
+				F108E6261CA0CA9300326EB9 /* InvaderB_01.png */,
+				F108E6271CA0CA9300326EB9 /* InvaderC_00.png */,
+				F108E6281CA0CA9300326EB9 /* InvaderC_01.png */,
+				F108E6291CA0CA9300326EB9 /* Ship.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		F1AA97951C977B7E00CC8AFC = {
 			isa = PBXGroup;
 			children = (
+				F108E5C41CA0C1F100326EB9 /* Space Invaders */,
 				F1AA97A01C977B7E00CC8AFC /* Farquad */,
 				F1AA97B41C977B7F00CC8AFC /* FarquadTests */,
 				F1AA97BF1C977B7F00CC8AFC /* FarquadUITests */,
@@ -318,9 +362,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F108E62A1CA0CA9300326EB9 /* InvaderB_00.png in Resources */,
 				F1AA97A81C977B7F00CC8AFC /* Assets.xcassets in Resources */,
+				F108E6241CA0C85E00326EB9 /* InvaderA_01.png in Resources */,
+				F108E62D1CA0CA9300326EB9 /* InvaderC_01.png in Resources */,
+				F108E62C1CA0CA9300326EB9 /* InvaderC_00.png in Resources */,
 				F1AA97A61C977B7E00CC8AFC /* GameScene.sks in Resources */,
+				F108E62B1CA0CA9300326EB9 /* InvaderB_01.png in Resources */,
 				F1AA97AB1C977B7F00CC8AFC /* MainMenu.xib in Resources */,
+				F108E6221CA0C85200326EB9 /* InvaderA_00.png in Resources */,
+				F108E62E1CA0CA9300326EB9 /* Ship.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +415,8 @@
 				F1AA97A21C977B7E00CC8AFC /* AppDelegate.swift in Sources */,
 				F1AA97EC1C9F002000CC8AFC /* SKTEffects.swift in Sources */,
 				F1AA97E61C9F002000CC8AFC /* Int+Extensions.swift in Sources */,
+				F108E5C61CA0C21900326EB9 /* SpaceScene.swift in Sources */,
+				F108E5F11CA0C2DB00326EB9 /* GameOverScene.swift in Sources */,
 				F1AA97EE1C9F002000CC8AFC /* Vector3.swift in Sources */,
 				F1AA97E91C9F002000CC8AFC /* SKColor+Extensions.swift in Sources */,
 			);
@@ -596,6 +649,7 @@
 				F1AA97C71C977B7F00CC8AFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F1AA97C81C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "FarquadTests" */ = {
 			isa = XCConfigurationList;
@@ -604,6 +658,7 @@
 				F1AA97CA1C977B7F00CC8AFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F1AA97CB1C977B7F00CC8AFC /* Build configuration list for PBXNativeTarget "FarquadUITests" */ = {
 			isa = XCConfigurationList;
@@ -612,6 +667,7 @@
 				F1AA97CD1C977B7F00CC8AFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

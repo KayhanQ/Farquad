@@ -53,7 +53,7 @@ int CPP::hasCollided() {
 
 std::string CPP::getQuadBox() {
     int fd;
-    const char *myfifo = "/tmp/quadData";
+    const char *myfifo = "/tmp/qData1";
     char buf[MAX_BUF];
     
     /* open, read, and display the message from the FIFO */

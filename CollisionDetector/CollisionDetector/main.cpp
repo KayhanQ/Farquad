@@ -44,7 +44,6 @@ void detectMarkers() {
         
         // read webcam
         stream1.read(cameraFrame);
-        namedWindow( "Original");
         
         medianBlur(cameraFrame, cameraFrame, 3);
         
@@ -84,8 +83,8 @@ void detectMarkers() {
         }
         
         
-        namedWindow("Detected red circles on the input image", CV_WINDOW_AUTOSIZE);
-        imshow("Detected red circles on the input image", cameraFrame);
+//        namedWindow("Detected red circles on the input image", CV_WINDOW_AUTOSIZE);
+//        imshow("Detected red circles on the input image", cameraFrame);
 
         if (waitKey(30) >= 0)
             break;
@@ -113,12 +112,13 @@ void detectMarkers() {
         }
     }
     
+    printf("Successfuly detected markers\n");
     printf("%d, %d, %f, %f \n", topLeft.x, topLeft.y, screenWidth, screenHeight);
     
 }
 
 cv::Point getRelativeCoordinate(cv::Point point) {
-    Point relPoint = Point((point.x - topLeft.x)/screenWidth, (point.y - topLeft.y)/screenHeight);
+    Point relPoint = Point((point.x - topLeft.x)/screenWidth, screenHeight - ((point.y - topLeft.y)/screenHeight));
     return relPoint;
 }
 
@@ -130,7 +130,6 @@ double getRelativeHeight(double height) {
     return height/screenHeight;
 }
 
-const char * exec_path = "./opencv_tracker";
 
 void sendData() {    
     cv::Point p = getRelativeCoordinate(cv::Point(quadRect.x, quadRect.y));
@@ -140,124 +139,106 @@ void sendData() {
     
     std::string string;
     
-    string += "10";
-    string += " 12";
-    string += " 15";
-    string += " 14";
-    string += " 14\0";
+    string += std::to_string(p.x);
+    string += " ";
+    string += std::to_string(p.y);
+    string += " ";
+    string += std::to_string(getRelativeWidth(quadRect.width));
+    string += " ";
+    string += std::to_string(getRelativeHeight(quadRect.height));
+    string += "\0";
 
+    printf("sending: %s\n", string.c_str());
     
-    printf("%s\n", string.c_str());
-    
-    int fd;
-    const char *myfifo = "/tmp/quadData";
-    
-    mkfifo(myfifo, 0666);
-    
-    fd = open(myfifo, O_WRONLY);
-    write(fd, string.c_str(), sizeof(char)*string.size());
-    close(fd);
-    
-    /* remove the FIFO */
-    unlink(myfifo);
-}
+    const char *myfifo = "/tmp/qData1";
+    int fd = open(myfifo, O_WRONLY);
 
-
-FILE * open_tracker_process()
-{
-    FILE * f = popen(exec_path, "r");
-    if(!f) {
-        fprintf(stderr, "failed to start opencv_tracker");
-        abort();
+    if (fd != -1) {
+        mkfifo(myfifo, 0666);
+        
+        write(fd, string.c_str(), sizeof(char)*string.size());
+        close(fd);
+        unlink(myfifo);
     }
-    
-    return f;
-}
-
-int read_tracker_frame(FILE * f, float * out, int num_floats_expected)
-{
-    for(int i = 0; i < num_floats_expected; i++) {
-        if(fscanf(f, "%f", out) < 1) {
-            return i; // or throw an error
-        }
-        // check for newline here if you want
-        ++out;
-    }
-    return num_floats_expected;
 }
 
 void detectQuad() {
-        VideoCapture stream1(0);
+    VideoCapture stream1(0);
     
-        while (true) {
-    
-            Mat cameraFrame, gray, threshBlack, \
-            blurBlack, \
-            cannyBlack;
-    
-            // read webcam
-            stream1.read(cameraFrame);
-            namedWindow( "Original");
-            imshow( "Original", cameraFrame);
-    
-            cvtColor(cameraFrame, gray, CV_BGR2GRAY); // greyscale
-    
-            threshold( gray, threshBlack, 100, 255 , THRESH_BINARY); //img in 1 or 0
-    
-            blur( threshBlack, blurBlack, Size(1,1) ); // odd number or 3x3
-    
-            Canny( blurBlack, cannyBlack, cutBlack, cutBlack*3, 3 ); //* 3 or 2
-    
-            namedWindow( "ThreshBlack");
-            imshow( "ThreshBlack", cannyBlack);
-    
-            vector<vector<Point> > contoursBlack;
+    while (true) {
         
-            findContours( cannyBlack, contoursBlack, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );// tree and external
-    
-            vector<vector<Point> > contours_poly2( contoursBlack.size() );
-            vector<Rect> boundRects( contoursBlack.size() );
-
-    
-            for( int i = 0; i < contoursBlack.size(); i++ )
-            {
-                approxPolyDP( Mat(contoursBlack[i]), contours_poly2[i], 1, true );
-                boundRects[i] = boundingRect( Mat(contours_poly2[i]) );
-            }
-            
-            // get the biggest Rect
-            for( int i = 0; i < contoursBlack.size(); i++ )
-            {
-                Rect curRect = boundRects[i];
-                if (i == 0) quadRect = curRect;
-                else if (quadRect.area() < curRect.area()) quadRect = curRect;
-            }
-            
-            //display
-            Mat boxesBlack = Mat::zeros(cannyBlack.size(), CV_8UC3 );
-    
-            Scalar color(255, 255, 255 );
-    
-            for( int i = 0; i< contoursBlack.size(); i++ ){
-                drawContours( boxesBlack, contours_poly2, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
-            }
-            
-            cv::rectangle(boxesBlack, quadRect, cv::Scalar(0, 255, 0));
-            
-            namedWindow( "BoxesBlack", CV_WINDOW_AUTOSIZE );
-            imshow( "BoxesBlack", boxesBlack);
-            
-            sendData();
-            
-            if (waitKey(30) >= 0)
-                break;
+        Mat cameraFrame, gray, threshBlack, \
+        blurBlack, \
+        cannyBlack;
+        
+        // read webcam
+        stream1.read(cameraFrame);
+//        namedWindow( "Original");
+//        imshow( "Original", cameraFrame);
+        
+        cvtColor(cameraFrame, gray, CV_BGR2GRAY); // greyscale
+        
+        threshold( gray, threshBlack, 100, 255 , THRESH_BINARY); //img in 1 or 0
+        
+        blur( threshBlack, blurBlack, Size(1,1) ); // odd number or 3x3
+        
+        Canny( blurBlack, cannyBlack, cutBlack, cutBlack*3, 3 ); //* 3 or 2
+        
+//        namedWindow( "ThreshBlack");
+//        imshow( "ThreshBlack", cannyBlack);
+        
+        vector<vector<Point> > contoursBlack;
+        
+        findContours( cannyBlack, contoursBlack, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );// tree and external
+        
+        vector<vector<Point> > contours_poly2( contoursBlack.size() );
+        vector<Rect> boundRects( contoursBlack.size() );
+        
+        
+        for( int i = 0; i < contoursBlack.size(); i++ )
+        {
+            approxPolyDP( Mat(contoursBlack[i]), contours_poly2[i], 1, true );
+            boundRects[i] = boundingRect( Mat(contours_poly2[i]) );
         }
+        
+        // get the biggest Rect
+        for( int i = 0; i < contoursBlack.size(); i++ )
+        {
+            Rect curRect = boundRects[i];
+            if (i == 0) quadRect = curRect;
+            else if (quadRect.area() < curRect.area()) quadRect = curRect;
+        }
+        
+        //display
+        Mat boxesBlack = Mat::zeros(cannyBlack.size(), CV_8UC3 );
+        
+        Scalar color(255, 255, 255 );
+        
+        for( int i = 0; i< contoursBlack.size(); i++ ){
+            drawContours( boxesBlack, contours_poly2, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
+        }
+        
+        cv::rectangle(boxesBlack, quadRect, cv::Scalar(0, 255, 0));
+        
+        namedWindow( "BoxesBlack", CV_WINDOW_AUTOSIZE );
+        imshow( "BoxesBlack", boxesBlack);
+        
+        
+        if (waitKey(30) >= 0)
+            break;
+        
+        sendData();
+
+    }
+
 }
 
 int main()
 {
-    //detectMarkers();
+    detectMarkers();
     detectQuad();
+    
+    
 //
 //    VideoCapture stream1(0);
 //
