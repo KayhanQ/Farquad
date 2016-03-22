@@ -15,7 +15,13 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     
     // Game End
     var gameEnding: Bool = false
+    var isLoaded = false
+    let startVision = true
     
+    let markerRadius: CGFloat = 60
+    
+    var task = NSTask()
+
     // Contact
     var contactQueue = Array<SKPhysicsContact>()
     
@@ -84,7 +90,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     var contentCreated: Bool = false
     
     // Invaders Properties
-    var invaderMovementDirection: InvaderMovementDirection = .Down
+    var invaderMovementDirection: InvaderMovementDirection = .Up
     var timeOfLastMove: CFTimeInterval = 0.0
     var timePerMove: CFTimeInterval = 1.0
     
@@ -112,23 +118,23 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     
     func createMarkers() {
         let topLeft = makeCircle()
-        let radius: CGFloat = 30
-        topLeft.position = CGPoint(x: radius, y: self.frame.size.height - radius)
+        topLeft.position = CGPoint(x: markerRadius, y: self.frame.size.height - markerRadius - 10)
+        topLeft.xScale = 1.1
         self.addChild(topLeft)
         
-        let topRight = makeCircle()
-        topRight.position = CGPoint(x: self.frame.size.width - radius, y: self.frame.size.height - radius)
-        self.addChild(topRight)
+        let botRight = makeCircle()
+        botRight.position = CGPoint(x: self.frame.size.width - markerRadius, y: markerRadius + 10)
+        self.addChild(botRight)
 
-        let botLeft = makeCircle()
-        botLeft.position = CGPoint(x: radius, y: radius)
-        self.addChild(botLeft)
+//        let botLeft = makeCircle()
+//        botLeft.position = CGPoint(x: radius, y: radius)
+//        self.addChild(botLeft)
         
 
     }
     
     func makeCircle() -> SKShapeNode {
-        let circle = SKShapeNode(circleOfRadius: 30)
+        let circle = SKShapeNode(circleOfRadius: markerRadius)
         circle.fillColor = NSColor.redColor()
         circle.strokeColor = NSColor.redColor()
 
@@ -151,6 +157,38 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         //self.backgroundColor = SKColor.blackColor()
         
         createMarkers()
+        
+        
+        if startVision {
+            task = NSTask()
+            task.launchPath = "/Users/kayhanacs/Library/Developer/Xcode/DerivedData/CollisionDetector-aryukpngkxwfkcexxmqhrsjavreg/Build/Products/Debug/CollisionDetector"
+            
+            let pipe = NSPipe()
+            task.standardOutput = pipe
+            let outHandle = pipe.fileHandleForReading
+            outHandle.waitForDataInBackgroundAndNotify()
+            
+            var obs1 : NSObjectProtocol!
+            obs1 = NSNotificationCenter.defaultCenter().addObserverForName(NSFileHandleDataAvailableNotification,
+                object: outHandle, queue: nil) {  notification -> Void in
+                    let data = outHandle.availableData
+                    if data.length > 0 {
+                        if let str = NSString(data: data, encoding: NSUTF8StringEncoding) {
+                            //print("got output: \(str)")
+                            self.updateQuad(str as String)
+                            
+                        }
+                        outHandle.waitForDataInBackgroundAndNotify()
+                    } else {
+                        print("EOF on stdout from process")
+                        NSNotificationCenter.defaultCenter().removeObserver(obs1)
+                    }
+            }
+            
+            task.launch()
+        }
+        
+        
     }
     
     
@@ -250,7 +288,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         let ship: SKNode = self.makeShip()
         
         // 2
-        ship.position = CGPointMake(self.size.width / 2, kShipSize.height / 2)
+        ship.position = CGPointMake(0,0)
         
         self.addChild(ship)
     }
@@ -265,32 +303,36 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
 //        ship.name = kShipName
 //        container.addChild(ship)
 //        
-        let ship = SKShapeNode(rectOfSize: CGSize(width: 200, height: 40))
-        ship.name = kShipName
-        //container.addChild(box)
         
+        let ship = SKNode()
+        ship.name = kShipName
+
+        let box = SKShapeNode(rectOfSize: CGSize(width: 200, height: 40))
+        ship.addChild(box)
+
         // Physic
         // 1
-        ship.physicsBody = SKPhysicsBody(rectangleOfSize: ship.frame.size)
-        
-        // 2
-        //ship.physicsBody!.dynamic = true
-        
-        // 3
-        ship.physicsBody!.affectedByGravity = false
-        
-        // 4
-        ship.physicsBody!.mass = 0.02
-        
-        // ship's bitmask setup
-        // 1
-        ship.physicsBody!.categoryBitMask = kShipCategory
-        
-        // 2
-        ship.physicsBody!.contactTestBitMask = 0x0
-        
+//        ship.physicsBody = SKPhysicsBody(rectangleOfSize: ship.frame.size)
+//        
+//        // 2
+//        ship.physicsBody!.dynamic = false
+//        
+//        // 3
+//        ship.physicsBody!.affectedByGravity = false
+//        
+//        // 4
+//        ship.physicsBody!.mass = 0.02
+//        
+//        // ship's bitmask setup
+//        // 1
+//        ship.physicsBody!.categoryBitMask = kShipCategory
+//        
+//        // 2
+//        ship.physicsBody!.contactTestBitMask = 0x0
+//        
         // 3
         //ship.physicsBody!.collisionBitMask = kSceneEdgeCategory
+        
         
         return ship
     }
@@ -326,6 +368,14 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         // 6
         healthLabel.position = CGPointMake(self.frame.size.width / 2, self.size.height - (80 + healthLabel.frame.size.height / 2))
         self.addChild(healthLabel)
+        
+        let posLabel = SKLabelNode(fontNamed: "Courier")
+        posLabel.name = "posLabel"
+        posLabel.fontSize = 25
+        posLabel.fontColor = SKColor.greenColor()
+        posLabel.text = String(format: "Pos")
+        posLabel.position = CGPointMake(self.frame.size.width / 2, 50)
+        self.addChild(posLabel)
     }
     
     
@@ -373,9 +423,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
             
             self.endGame()
         }
-        
-        self.updateQuad()
-        
+
         self.processContactsForUpdate(currentTime)
         
         self.processUserTapsForUpdate(currentTime)
@@ -384,15 +432,13 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         
         self.moveInvadersForUpdate(currentTime)
         
-        self.fireInvaderBulletsForUpdate(currentTime)
+        //self.fireInvaderBulletsForUpdate(currentTime)
     }
     
-    func updateQuad() {
-        print("updating quad")
+    func updateQuad(string: String) {
 
-        let string = CPP_Wrapper().getQuadBox_wrapped()
         let stringArr = string.componentsSeparatedByString(" ")
-        print("quad position is \(string)")
+        print("Rel coordinates \(string)")
 
         var floatArr = [Float]();
         
@@ -411,9 +457,24 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
             if let ship = self.childNodeWithName(kShipName) {
                 let x = cgfloatArr[0] * self.frame.size.width
                 let y = cgfloatArr[1] * self.frame.size.height
-
+                
+                let width = cgfloatArr[2] * self.frame.size.width
+                let height = cgfloatArr[3] * self.frame.size.height
+                
+                ship.removeAllChildren()
+                
+                let box = SKShapeNode(rectOfSize: CGSize(width: width, height: height))
+                box.position.x = width/2
+                box.position.y = height/2
+                box.fillColor = NSColor.greenColor()
+                ship.addChild(box)
+                
                 ship.position = CGPoint(x: x, y: y)
                 
+                print("Actual coordinates \(ship.position), \(box.frame.size)")
+                let posLabel = self.childNodeWithName("posLabel") as! SKLabelNode
+                posLabel.text = "position: \(ship.position)"
+
 
             }
         }
@@ -836,6 +897,8 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         // 1
         if !self.gameEnding {
             
+            task.terminate()
+            
             self.gameEnding = true
             
             // 2
@@ -847,6 +910,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
             view!.presentScene(gameOverScene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
         }
     }
+    
     
     
 }

@@ -24,7 +24,9 @@ using namespace std;
 int cutWhite = 100;
 int cutBlack = 100;
 
-cv::Point topLeft;
+cv::Point2f topLeft;
+cv::Point2f botRight;
+
 float screenWidth;
 float screenHeight;
 
@@ -34,7 +36,8 @@ void detectMarkers() {
     VideoCapture stream1(0);
     
     vector<Point> markers;
-
+    vector<float> radi;
+    
     bool markersDetected = false;
     while (!markersDetected) {
         Mat cameraFrame, gray,
@@ -65,76 +68,96 @@ void detectMarkers() {
         
         // Use the Hough transform to detect circles in the combined threshold image
         std::vector<cv::Vec3f> circles;
-        HoughCircles(red_hue_image, circles, CV_HOUGH_GRADIENT, 1, red_hue_image.rows/8, 100, 40, 0, 0);
+        HoughCircles(red_hue_image, circles, CV_HOUGH_GRADIENT, 1, red_hue_image.rows/8, 100, 30, 0, 0);
         
 
         // Loop over all detected circles and outline them on the original image
-        if(circles.size() >= 3) {
+        if(circles.size() >= 2) {
             markersDetected = true;
             
             for(size_t current_circle = 0; current_circle < circles.size(); ++current_circle) {
-            cv::Point point(std::round(circles[current_circle][0]), std::round(circles[current_circle][1]));
+                cv::Point point(std::round(circles[current_circle][0]), std::round(circles[current_circle][1]));
             
-            markers.push_back(point);
-        
-            int radius = std::round(circles[current_circle][2]);
-            cv::circle(cameraFrame, point, radius, cv::Scalar(0, 255, 0), 5);
+                markers.push_back(point);
+                radi.push_back(float(std::round(circles[current_circle][2])));
             }
         }
         
+        for(size_t current_circle = 0; current_circle < circles.size(); ++current_circle) {
+            cv::Point point(std::round(circles[current_circle][0]), std::round(circles[current_circle][1]));
+            int radius = std::round(circles[current_circle][2]);
+            cv::circle(cameraFrame, point, radius, cv::Scalar(0, 255, 0), 5);
+        }
         
-//        namedWindow("Detected red circles on the input image", CV_WINDOW_AUTOSIZE);
-//        imshow("Detected red circles on the input image", cameraFrame);
+        
+        namedWindow("Detected red circles on the input image", CV_WINDOW_AUTOSIZE);
+        imshow("Detected red circles on the input image", cameraFrame);
 
         if (waitKey(30) >= 0)
             break;
     }
     
+    fprintf(stderr, "originals: %d, %d, %d, %d \n", markers[0].x, markers[0].y, markers[1].x, markers[1].y);
 
-    for (int i = 0; i<markers.size(); i++) {
-        cv::Point cur = markers[i];
-        if (i == 0) {
-            topLeft.x = cur.x;
-            topLeft.y = cur.y;
-            screenHeight = abs(topLeft.y - markers[1].y);
-            screenWidth = abs(topLeft.x - markers[1].x);
-        }
-        else {
-            cv::Point prev = markers[i-1];
-            if (cur.x < topLeft.x && cur.y < topLeft.y) {
-                topLeft.x = cur.x;
-                topLeft.y = cur.y;
-            }
-            float height = abs(cur.y - prev.y);
-            if (height > screenHeight) screenHeight = height;
-            float width = abs(cur.x - prev.x);
-            if (width > screenWidth) screenWidth = width;
-        }
+    if (markers[0].x < markers[1].x && markers[0].y < markers[1].y) {
+        topLeft.x = (float) markers[0].x - radi[0];
+        topLeft.y = (float) markers[0].y - radi[0];
+        botRight.x = (float) markers[1].x  + radi[1];
+        botRight.y = (float) markers[1].y + radi[1];
+    }
+    else {
+        botRight.x = (float) markers[0].x  + radi[0];
+        botRight.y = (float) markers[0].y  + radi[0];
+        topLeft.x = (float) markers[1].x - radi[1];
+        topLeft.y = (float) markers[1].y - radi[1];
     }
     
-    printf("Successfuly detected markers\n");
-    printf("%d, %d, %f, %f \n", topLeft.x, topLeft.y, screenWidth, screenHeight);
+    screenWidth = botRight.x - topLeft.x;
+    screenHeight = botRight.y - topLeft.y;
+    
+//    for (int i = 0; i<markers.size(); i++) {
+//        cv::Point2f cur = markers[i];
+//        if (i == 0) {
+//            topLeft.x = cur.x;
+//            topLeft.y = cur.y;
+//            screenHeight = abs(topLeft.y - markers[1].y);
+//            screenWidth = abs(topLeft.x - markers[1].x);
+//        }
+//        else {
+//            cv::Point2f prev = markers[i-1];
+//            if (cur.x < topLeft.x && cur.y < topLeft.y) {
+//                topLeft.x = cur.x;
+//                topLeft.y = cur.y;
+//            }
+//            float height = abs(cur.y - prev.y);
+//            if (height > screenHeight) screenHeight = height;
+//            float width = abs(cur.x - prev.x);
+//            if (width > screenWidth) screenWidth = width;
+//        }
+//    }
+    
+    fprintf(stderr, "Successfuly detected markers\n");
+    fprintf(stderr, "%f, %f, %f, %f \n", topLeft.x, topLeft.y, screenWidth, screenHeight);
     
 }
 
-cv::Point getRelativeCoordinate(cv::Point point) {
-    Point relPoint = Point((point.x - topLeft.x)/screenWidth, screenHeight - ((point.y - topLeft.y)/screenHeight));
+cv::Point2f getRelativeCoordinate(cv::Point2f point) {
+    Point2f relPoint = Point2f((point.x - topLeft.x)/screenWidth, 1.0f - ((point.y - topLeft.y)/screenHeight));
     return relPoint;
 }
 
-double getRelativeWidth(double width) {
+float getRelativeWidth(float width) {
     return width/screenWidth;
 }
 
-double getRelativeHeight(double height) {
+float getRelativeHeight(float height) {
     return height/screenHeight;
 }
 
 
 void sendData() {    
-    cv::Point p = getRelativeCoordinate(cv::Point(quadRect.x, quadRect.y));
+    cv::Point2f p = getRelativeCoordinate(cv::Point2f(quadRect.x, quadRect.y));
     
-
     //std::string string = std::to_string(p.x) + " " + std::to_string(p.y) + " " + std::to_string(getRelativeWidth(quadRect.width)) + " " +  std::to_string(getRelativeHeight(quadRect.height));
     
     std::string string;
@@ -148,18 +171,7 @@ void sendData() {
     string += std::to_string(getRelativeHeight(quadRect.height));
     string += "\0";
 
-    printf("sending: %s\n", string.c_str());
-    
-    const char *myfifo = "/tmp/qData1";
-    int fd = open(myfifo, O_WRONLY);
-
-    if (fd != -1) {
-        mkfifo(myfifo, 0666);
-        
-        write(fd, string.c_str(), sizeof(char)*string.size());
-        close(fd);
-        unlink(myfifo);
-    }
+    printf("%s\n", string.c_str());
 }
 
 void detectQuad() {
@@ -224,10 +236,11 @@ void detectQuad() {
         imshow( "BoxesBlack", boxesBlack);
         
         
+        sendData();
+
         if (waitKey(30) >= 0)
             break;
         
-        sendData();
 
     }
 
