@@ -72,7 +72,7 @@ void detectMarkers() {
         
 
         // Loop over all detected circles and outline them on the original image
-        if(circles.size() >= 2) {
+        if(circles.size() >= 2 && circles.size() <= 4) {
             markersDetected = true;
             
             for(size_t current_circle = 0; current_circle < circles.size(); ++current_circle) {
@@ -114,27 +114,6 @@ void detectMarkers() {
     
     screenWidth = botRight.x - topLeft.x;
     screenHeight = botRight.y - topLeft.y;
-    
-//    for (int i = 0; i<markers.size(); i++) {
-//        cv::Point2f cur = markers[i];
-//        if (i == 0) {
-//            topLeft.x = cur.x;
-//            topLeft.y = cur.y;
-//            screenHeight = abs(topLeft.y - markers[1].y);
-//            screenWidth = abs(topLeft.x - markers[1].x);
-//        }
-//        else {
-//            cv::Point2f prev = markers[i-1];
-//            if (cur.x < topLeft.x && cur.y < topLeft.y) {
-//                topLeft.x = cur.x;
-//                topLeft.y = cur.y;
-//            }
-//            float height = abs(cur.y - prev.y);
-//            if (height > screenHeight) screenHeight = height;
-//            float width = abs(cur.x - prev.x);
-//            if (width > screenWidth) screenWidth = width;
-//        }
-//    }
     
     fprintf(stderr, "Successfuly detected markers\n");
     fprintf(stderr, "%f, %f, %f, %f \n", topLeft.x, topLeft.y, screenWidth, screenHeight);
@@ -190,7 +169,7 @@ void detectQuad() {
         
         cvtColor(cameraFrame, gray, CV_BGR2GRAY); // greyscale
         
-        threshold( gray, threshBlack, 100, 255 , THRESH_BINARY); //img in 1 or 0
+        threshold( gray, threshBlack, 50, 255, THRESH_BINARY); //img in 1 or 0
         
         blur( threshBlack, blurBlack, Size(1,1) ); // odd number or 3x3
         
@@ -203,14 +182,27 @@ void detectQuad() {
         
         findContours( cannyBlack, contoursBlack, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );// tree and external
         
+        float contour_length_threshold = 5.0f;
+        
+        for (vector<vector<Point> >::iterator it = contoursBlack.begin(); it!=contoursBlack.end(); )
+        {
+            if (it->size()<contour_length_threshold)
+                it=contoursBlack.erase(it);
+            else
+                ++it;
+        }
+        
         vector<vector<Point> > contours_poly2( contoursBlack.size() );
         vector<Rect> boundRects( contoursBlack.size() );
         
-        
+        Mat boxesBlack = Mat::zeros(cannyBlack.size(), CV_8UC3 );
+
         for( int i = 0; i < contoursBlack.size(); i++ )
         {
             approxPolyDP( Mat(contoursBlack[i]), contours_poly2[i], 1, true );
             boundRects[i] = boundingRect( Mat(contours_poly2[i]) );
+            cv::rectangle(boxesBlack, boundRects[i], cv::Scalar(255, 255, 255));
+
         }
         
         // get the biggest Rect
@@ -222,9 +214,8 @@ void detectQuad() {
         }
         
         //display
-        Mat boxesBlack = Mat::zeros(cannyBlack.size(), CV_8UC3 );
         
-        Scalar color(255, 255, 255 );
+        Scalar color(0, 255, 255 );
         
         for( int i = 0; i< contoursBlack.size(); i++ ){
             drawContours( boxesBlack, contours_poly2, i, color, 1, 8, vector<Vec4i>(), 0, Point() );

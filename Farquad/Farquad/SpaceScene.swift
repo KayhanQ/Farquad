@@ -143,6 +143,13 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     
     
     func createContent() {
+        self.backgroundColor = SKColor(red: 0, green: 0, blue: 0, alpha: 0)
+
+        createMarkers()
+
+        //sleep(1)
+        
+        
         physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         
         physicsBody!.categoryBitMask = kSceneEdgeCategory
@@ -156,7 +163,6 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         // 2 black space color
         //self.backgroundColor = SKColor.blackColor()
         
-        createMarkers()
         
         
         if startVision {
@@ -455,17 +461,23 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         if cgfloatArr.count >= 4 {
             //quadrotor = SKShapeNode(rect: CGRect(x: cgfloatArr[0], y: cgfloatArr[1], width: cgfloatArr[2], height: cgfloatArr[3]))
             if let ship = self.childNodeWithName(kShipName) {
-                let x = cgfloatArr[0] * self.frame.size.width
-                let y = cgfloatArr[1] * self.frame.size.height
+                let yOffset: CGFloat = 100
+
                 
                 let width = cgfloatArr[2] * self.frame.size.width
                 let height = cgfloatArr[3] * self.frame.size.height
                 
+                var x = (cgfloatArr[0] + cgfloatArr[2]/2) * self.frame.size.width
+                var y = (cgfloatArr[1] + cgfloatArr[3]/2) * self.frame.size.height
+                
+//                x += (x + self.frame.size.height - y) / (x + self.frame.size.height - y) * width
+//                y -= height
+
                 ship.removeAllChildren()
                 
                 let box = SKShapeNode(rectOfSize: CGSize(width: width, height: height))
-                box.position.x = width/2
-                box.position.y = height/2
+//                box.position.x = width/2
+//                box.position.y = height/2
                 box.fillColor = NSColor.greenColor()
                 ship.addChild(box)
                 
