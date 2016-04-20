@@ -24,17 +24,37 @@ using namespace std;
 int cutWhite = 100;
 int cutBlack = 100;
 
+cv::Point2f botLeft;
 cv::Point2f topLeft;
+cv::Point2f topRight;
 cv::Point2f botRight;
 
 float screenWidth;
 float screenHeight;
 
 cv::Rect quadRect;
+cv::Mat warpAffineMatrix;
+
+
+struct yComparator
+{
+    inline bool operator() (cv::Point2f p1, cv::Point2f p2)
+    {
+        return (p1.y < p2.y);
+    }
+};
+
+struct xComparator
+{
+    inline bool operator() (cv::Point2f p1, cv::Point2f p2)
+    {
+        return (p1.x < p2.x);
+    }
+};
 
 void detectMarkers() {
     VideoCapture stream1(0);
-    
+
     vector<Point> markers;
     vector<float> radi;
     
@@ -72,7 +92,7 @@ void detectMarkers() {
         
 
         // Loop over all detected circles and outline them on the original image
-        if(circles.size() >= 2 && circles.size() <= 4) {
+        if(circles.size() >= 4 && circles.size() <= 4) {
             markersDetected = true;
             
             for(size_t current_circle = 0; current_circle < circles.size(); ++current_circle) {
@@ -99,21 +119,36 @@ void detectMarkers() {
     
     fprintf(stderr, "originals: %d, %d, %d, %d \n", markers[0].x, markers[0].y, markers[1].x, markers[1].y);
 
-    if (markers[0].x < markers[1].x && markers[0].y < markers[1].y) {
-        topLeft.x = (float) markers[0].x - radi[0];
-        topLeft.y = (float) markers[0].y - radi[0];
-        botRight.x = (float) markers[1].x  + radi[1];
-        botRight.y = (float) markers[1].y + radi[1];
-    }
-    else {
-        botRight.x = (float) markers[0].x  + radi[0];
-        botRight.y = (float) markers[0].y  + radi[0];
-        topLeft.x = (float) markers[1].x - radi[1];
-        topLeft.y = (float) markers[1].y - radi[1];
-    }
+    std::stable_sort(markers.begin(), markers.end(), yComparator());
+    std::stable_sort(markers.begin(), markers.end(), xComparator());
     
-    screenWidth = botRight.x - topLeft.x;
-    screenHeight = botRight.y - topLeft.y;
+    for (int i = 0; i < markers.size(); i++) {
+        printf("x: %d, y: %d\n", markers[i].x, markers[i].y);
+    }
+  
+    botLeft = markers[0];
+    topLeft = markers[1];
+    topRight = markers[2];
+    botRight = markers[3];
+    
+//
+//    vector<Point> skewedPoints;
+//    skewedPoints.push_back(topLeft);
+//    skewedPoints.push_back(topRight);
+//    skewedPoints.push_back(botLeft);
+//    skewedPoints.push_back(botRight);
+//    
+//    vector<Point> realPoints;
+//    realPoints.push_back(Point(0, 0));
+//    realPoints.push_back(Point(1024, 0));
+//    realPoints.push_back(Point(0, 768));
+//    realPoints.push_back(Point(1024, 768));
+//    
+//    warpAffineMatrix = getPerspectiveTransform(skewedPoints, realPoints);
+//
+
+    screenWidth = botRight.x - botLeft.x;
+    screenHeight = botRight.y - topRight.y;
     
     fprintf(stderr, "Successfuly detected markers\n");
     fprintf(stderr, "%f, %f, %f, %f \n", topLeft.x, topLeft.y, screenWidth, screenHeight);
@@ -121,7 +156,17 @@ void detectMarkers() {
 }
 
 cv::Point2f getRelativeCoordinate(cv::Point2f point) {
-    Point2f relPoint = Point2f((point.x - topLeft.x)/screenWidth, 1.0f - ((point.y - topLeft.y)/screenHeight));
+    float m1 = (topLeft.y - botLeft.y) / (topLeft.x - botLeft.x);
+    float m2 = (topRight.y - botRight.y) / (topRight.x - botRight.x);
+
+    float x1 = topLeft.x + point.y / m1;
+    float x2 = topRight.x + point.y / m2;
+
+    float width = x2 - x1;
+    
+    Point2f relPoint = Point2f((point.x - x1)/width, 1.0f - ((point.y - topLeft.y)/screenHeight));
+    
+    //Point2f relPoint = Point2f((point.x - topLeft.x)/screenWidth, 1.0f - ((point.y - topLeft.y)/screenHeight));
     return relPoint;
 }
 
@@ -171,7 +216,7 @@ void detectQuad() {
         
         threshold( gray, threshBlack, 50, 255, THRESH_BINARY); //img in 1 or 0
         
-        blur( threshBlack, blurBlack, Size(1,1) ); // odd number or 3x3
+        blur( threshBlack, blurBlack, Size(5,5) ); // odd number or 3x3
         
         Canny( blurBlack, cannyBlack, cutBlack, cutBlack*3, 3 ); //* 3 or 2
         
@@ -200,8 +245,16 @@ void detectQuad() {
         for( int i = 0; i < contoursBlack.size(); i++ )
         {
             approxPolyDP( Mat(contoursBlack[i]), contours_poly2[i], 1, true );
+            
             boundRects[i] = boundingRect( Mat(contours_poly2[i]) );
-            cv::rectangle(boxesBlack, boundRects[i], cv::Scalar(255, 255, 255));
+
+            if (isContourConvex(contours_poly2[i])) {
+                cv::rectangle(boxesBlack, boundRects[i], Scalar(255, 255, 255 ));
+            }
+            else {
+                cv::rectangle(boxesBlack, boundRects[i], Scalar(0, 0, 255 ));
+            }
+            
 
         }
         
@@ -240,94 +293,7 @@ void detectQuad() {
 int main()
 {
     detectMarkers();
-    detectQuad();
-    
-    
-//
-//    VideoCapture stream1(0);
-//
-//    //detectMarkers();
-//    while (true) {
-//
-//        Mat cameraFrame, gray,
-//        threshWhite, threshBlack, \
-//        blurWhite, blurBlack, \
-//        cannyWhite, cannyBlack;
-//        
-//        // read webcam
-//        stream1.read(cameraFrame);
-//        namedWindow( "Original");
-//        imshow( "Original", cameraFrame);
-//        
-//        cvtColor(cameraFrame, gray, CV_BGR2GRAY); // greyscale
-//        
-//        threshold( gray, threshBlack, 100, 255 , THRESH_BINARY); //img in 1 or 0
-//        threshold( gray, threshWhite, 170, 255 , THRESH_BINARY_INV); // img out > 170 is white it's inv
-//
-//        blur( threshWhite, blurWhite, Size(7,7) ); // odd number or 3x3
-//        blur( threshBlack, blurBlack, Size(7,7) );
-//        
-//        Canny( blurWhite, cannyWhite, cutWhite, cutWhite*2, 3 ); // makes gradient for edges
-//        Canny( blurBlack, cannyBlack, cutBlack, cutBlack*2, 3 );
-//        
-//        namedWindow( "ThreshBlack");
-//        imshow( "ThreshBlack", cannyBlack);
-//        
-//        vector<vector<Point> > contoursWhite;
-//        vector<vector<Point> > contoursBlack;
-//        
-//        vector<Vec4i> hierarchy; // unused
-//        
-//        findContours( cannyWhite, contoursWhite, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) ); // tree and external
-//        findContours( cannyBlack, contoursBlack, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-//        
-//        vector<vector<Point> > contours_poly1( contoursWhite.size() ); // list of contours
-//        vector<Rect> boundRect1( contoursWhite.size() );
-//        
-//        vector<vector<Point> > contours_poly2( contoursBlack.size() );
-//        vector<Rect> boundRect2( contoursBlack.size() );
-//        
-//        for( int i = 0; i < contoursWhite.size(); i++ )
-//        {
-//            approxPolyDP( Mat(contoursWhite[i]), contours_poly1[i], 3, true ); //unused
-//            boundRect1[i] = boundingRect( Mat(contours_poly1[i]) );
-//        }
-//        
-//        for( int i = 0; i < contoursBlack.size(); i++ )
-//        { approxPolyDP( Mat(contoursBlack[i]), contours_poly2[i], 1, true );
-//            boundRect2[i] = boundingRect( Mat(contours_poly2[i]) );
-//        }
-//        
-//        
-//        
-//        //display
-//        Mat boxesWhite = Mat::zeros(cannyWhite.size(), CV_8UC3 );
-//        Mat boxesBlack = Mat::zeros(cannyBlack.size(), CV_8UC3 );
-//        
-//        Scalar color(255, 255, 255 );
-//        
-//        for( int i = 0; i< contoursWhite.size(); i++ ){
-//            drawContours( boxesWhite, contours_poly1, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
-//            rectangle( boxesWhite, boundRect1[i].tl(), boundRect1[i].br(), color, 2, 8, 0 );
-//        }
-//        
-//        for( int i = 0; i< contoursBlack.size(); i++ ){
-//            drawContours( boxesBlack, contours_poly2, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
-//            rectangle( boxesBlack, boundRect2[i].tl(), boundRect2[i].br(), color, 2, 8, 0 );
-//        }
-//        
-//        /// Show in a window
-//        namedWindow( "ContoursWhite", CV_WINDOW_AUTOSIZE );
-//        imshow( "ContoursWhite", boxesWhite);
-//        
-//        namedWindow( "ContoursBlack", CV_WINDOW_AUTOSIZE );
-//        imshow( "ContoursBlack", boxesBlack);
-//        
-//        if (waitKey(30) >= 0)
-//            break;
-//    }
-    
-    //return 0;
+    detectQuad();    
 }
 
 

@@ -66,7 +66,7 @@ class GameOverScene: SKScene {
         print("Key Pressed \(key)")
         
         if key == "\r" {
-            let gameScene = GameScene(size: self.size)
+            let gameScene = SpaceScene(size: self.size)
             gameScene.scaleMode = SKSceneScaleMode.AspectFit
         
             self.view!.presentScene(gameScene, transition: SKTransition.doorsCloseHorizontalWithDuration(1.0))

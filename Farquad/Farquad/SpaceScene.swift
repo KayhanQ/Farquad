@@ -16,8 +16,9 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     // Game End
     var gameEnding: Bool = false
     var isLoaded = false
-    let startVision = false
-    
+    let startVision = true
+    let playerInvincible = false
+
     let markerRadius: CGFloat = 60
     
     var visionTask = NSTask()
@@ -58,7 +59,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     let kInvaderSize = CGSize(width: 24, height: 18)
     let kInvaderGridSpacing = CGSize(width: 12, height: 9)
     let kInvaderRowCount = 12
-    let kInvaderColCount = 12
+    let kInvaderColCount = 6
     
     // 3
     let kInvaderName = "invader"
@@ -79,12 +80,12 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     
     // Score and Health
     var score: Int = 0
-    var shipHealth: Float = 1.0
+    var shipHealth: Float = 5.0
     
     // Bullets utils
     let kShipFiredBulletName = "shipFiredBullet"
     let kInvaderFiredBulletName = "invaderFiredBullet"
-    let kBulletSize = CGSize(width:8, height: 4)
+    let kBulletSize = CGSize(width:18, height: 10)
     
     // Private GameScene Properties
     
@@ -129,14 +130,34 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(markers)
         markers.name = kMarkersName
         
-        let topLeft = makeCircle()
-        topLeft.position = CGPoint(x: markerRadius, y: self.frame.size.height - markerRadius)
-        //topLeft.xScale = 1.1
-        markers.addChild(topLeft)
+        for i in 1...4 {
+            let circle = makeCircle()
+            
+            var x: CGFloat = markerRadius
+            var y: CGFloat = self.frame.size.height - markerRadius
+
+            if i <= 2 {
+                x = self.frame.size.width - markerRadius
+            }
+            
+            if i % 2 == 1 {
+                y = markerRadius
+            }
+            
+            circle.position = CGPoint(x: x, y: y)
+            markers.addChild(circle)
+            print(x, y);
+
+        }
         
-        let botRight = makeCircle()
-        botRight.position = CGPoint(x: self.frame.size.width - markerRadius, y: markerRadius)
-        markers.addChild(botRight)
+//        let topLeft = makeCircle()
+//        topLeft.position = CGPoint(x: markerRadius, y: self.frame.size.height - markerRadius)
+//        //topLeft.xScale = 1.1
+//        markers.addChild(topLeft)
+//        
+//        let botRight = makeCircle()
+//        botRight.position = CGPoint(x: self.frame.size.width - markerRadius, y: markerRadius)
+//        markers.addChild(botRight)
     }
     
     func makeCircle() -> SKShapeNode {
@@ -160,6 +181,8 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         
         setupHud()
         
+        //createMarkers()
+
         if startVision {
             startVisionProcess()
         }
@@ -227,7 +250,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
                 let height = cgfloatArr[3] * self.frame.size.height
                 
                 let x = (cgfloatArr[0] + cgfloatArr[2]/2) * self.frame.size.width
-                let y = (cgfloatArr[1] + cgfloatArr[3]/2) * self.frame.size.height
+                let y = (cgfloatArr[1]) * self.frame.size.height
                 
                 ship.removeAllChildren()
                 makeShip(ship, size: CGSize(width: width, height: height))
@@ -284,7 +307,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
     
     func setupInvaders() {
         
-        let baseOrigin = CGPointMake(self.frame.size.width - CGFloat(kInvaderRowCount)*(kInvaderSize.width+kInvaderGridSpacing.width) , self.frame.size.height/2 - CGFloat(kInvaderColCount)*(kInvaderSize.height+kInvaderGridSpacing.height)/2)
+        let baseOrigin = CGPointMake(self.frame.size.width - CGFloat(kInvaderColCount)*(kInvaderSize.width+kInvaderGridSpacing.width) , self.frame.size.height/2 - CGFloat(kInvaderRowCount)*(kInvaderSize.height+kInvaderGridSpacing.height)/2)
         
         for var row = 1; row <= kInvaderRowCount; row++ {
             
@@ -317,9 +340,11 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         let ship = SKNode()
         ship.name = kShipName
         
-        makeShip(ship, size: CGSize(width: 200, height: 500))
+        makeShip(ship, size: CGSize(width: 200, height: 40))
         
         ship.position = CGPointMake(0,200)
+        
+
         
         self.addChild(ship)
     }
@@ -329,15 +354,15 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         let box = SKShapeNode(rectOfSize: size)
         box.name = kBoundingBoxName
         box.fillColor = NSColor.greenColor()
-
-        box.physicsBody = SKPhysicsBody(rectangleOfSize: box.frame.size)
-        box.physicsBody!.dynamic = false
-        box.physicsBody!.affectedByGravity = false
-        box.physicsBody!.mass = 0.02
-        box.physicsBody!.categoryBitMask = kShipCategory
-        box.physicsBody!.contactTestBitMask = 0x0
-
         ship.addChild(box)
+//
+//        ship.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+//        ship.physicsBody!.dynamic = false
+//        ship.physicsBody!.affectedByGravity = false
+//        ship.physicsBody!.mass = 0.02
+//        ship.physicsBody!.categoryBitMask = kShipCategory
+//        ship.physicsBody!.contactTestBitMask = 0x0
+
 
         //ship.physicsBody!.collisionBitMask = kSceneEdgeCategory
     }
@@ -425,7 +450,7 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
         
         self.moveInvadersForUpdate(currentTime)
         
-        self.fireInvaderBulletsForUpdate(currentTime)
+        //self.fireInvaderBulletsForUpdate(currentTime)
     }
     
     // Scene Update Helpers
@@ -651,7 +676,9 @@ class SpaceScene: SKScene, SKPhysicsContactDelegate {
             // Invader bullet hit a ship
             self.runAction(SKAction.playSoundFileNamed("ShipHit.wav", waitForCompletion: false))
             
-            self.adjustShipHealthBy(-0.334)
+            if !playerInvincible {
+                self.adjustShipHealthBy(-1.0)
+            }
             
             if self.shipHealth <= 0.0 {
                 
