@@ -33,7 +33,7 @@ float screenWidth;
 float screenHeight;
 
 cv::Rect quadRect;
-cv::Mat warpAffineMatrix;
+cv::Mat warpPerspectiveMatrix;
 
 
 struct yComparator
@@ -65,28 +65,25 @@ void detectMarkers() {
         blurWhite, blurBlack, \
         cannyWhite, cannyBlack;
         
-        // read webcam
         stream1.read(cameraFrame);
         
         medianBlur(cameraFrame, cameraFrame, 3);
         
-        // Convert input image to HSV
         Mat hsv_image;
         cvtColor(cameraFrame, hsv_image, cv::COLOR_BGR2HSV);
         
-        // Threshold the HSV image, keep only the red pixels
+        // Threshold the HSV range fo red
         Mat lower_red_hue_range;
         Mat upper_red_hue_range;
         inRange(hsv_image, cv::Scalar(0, 100, 100), cv::Scalar(10, 255, 255), lower_red_hue_range);
         inRange(hsv_image, cv::Scalar(160, 100, 100), cv::Scalar(179, 255, 255), upper_red_hue_range);
         
-        // Combine the above two images
         Mat red_hue_image;
         addWeighted(lower_red_hue_range, 1.0, upper_red_hue_range, 1.0, 0.0, red_hue_image);
         
         GaussianBlur(red_hue_image, red_hue_image, cv::Size(9, 9), 2, 2);
         
-        // Use the Hough transform to detect circles in the combined threshold image
+        // Detect circles, tolerance 20 - 35
         std::vector<cv::Vec3f> circles;
         HoughCircles(red_hue_image, circles, CV_HOUGH_GRADIENT, 1, red_hue_image.rows/8, 100, 30, 0, 0);
         
@@ -110,8 +107,8 @@ void detectMarkers() {
         }
         
         
-        namedWindow("Detected red circles on the input image", CV_WINDOW_AUTOSIZE);
-        imshow("Detected red circles on the input image", cameraFrame);
+        namedWindow("Fiducial Markers", CV_WINDOW_AUTOSIZE);
+        imshow("Fiducial Markers", cameraFrame);
 
         if (waitKey(30) >= 0)
             break;
@@ -119,6 +116,7 @@ void detectMarkers() {
     
     fprintf(stderr, "originals: %d, %d, %d, %d \n", markers[0].x, markers[0].y, markers[1].x, markers[1].y);
 
+    //sort our markers in a predictabel order
     std::stable_sort(markers.begin(), markers.end(), yComparator());
     std::stable_sort(markers.begin(), markers.end(), xComparator());
     
@@ -130,22 +128,20 @@ void detectMarkers() {
     topLeft = markers[1];
     topRight = markers[2];
     botRight = markers[3];
+
+    vector<Point> skewedPoints;
+    skewedPoints.push_back(topLeft);
+    skewedPoints.push_back(topRight);
+    skewedPoints.push_back(botLeft);
+    skewedPoints.push_back(botRight);
     
-//
-//    vector<Point> skewedPoints;
-//    skewedPoints.push_back(topLeft);
-//    skewedPoints.push_back(topRight);
-//    skewedPoints.push_back(botLeft);
-//    skewedPoints.push_back(botRight);
-//    
-//    vector<Point> realPoints;
-//    realPoints.push_back(Point(0, 0));
-//    realPoints.push_back(Point(1024, 0));
-//    realPoints.push_back(Point(0, 768));
-//    realPoints.push_back(Point(1024, 768));
-//    
-//    warpAffineMatrix = getPerspectiveTransform(skewedPoints, realPoints);
-//
+    vector<Point> realPoints;
+    realPoints.push_back(Point(0, 0));
+    realPoints.push_back(Point(1024, 0));
+    realPoints.push_back(Point(0, 768));
+    realPoints.push_back(Point(1024, 768));
+    
+    warpPerspectiveMatrix = getPerspectiveTransform(skewedPoints, realPoints);
 
     screenWidth = botRight.x - botLeft.x;
     screenHeight = botRight.y - topRight.y;
@@ -156,17 +152,26 @@ void detectMarkers() {
 }
 
 cv::Point2f getRelativeCoordinate(cv::Point2f point) {
-    float m1 = (topLeft.y - botLeft.y) / (topLeft.x - botLeft.x);
-    float m2 = (topRight.y - botRight.y) / (topRight.x - botRight.x);
-
-    float x1 = topLeft.x + point.y / m1;
-    float x2 = topRight.x + point.y / m2;
-
-    float width = x2 - x1;
+    vector<Point> curPoints;
+    vector<Point> transformedPoints;
     
-    Point2f relPoint = Point2f((point.x - x1)/width, 1.0f - ((point.y - topLeft.y)/screenHeight));
+    curPoints.push_back(point);
+
+    // put our point through the perspectiv etransform
+    perspectiveTransform(curPoints, transformedPoints, warpPerspectiveMatrix);
     
+//    float m1 = (topLeft.y - botLeft.y) / (topLeft.x - botLeft.x);
+//    float m2 = (topRight.y - botRight.y) / (topRight.x - botRight.x);
+//
+//    float x1 = topLeft.x + point.y / m1;
+//    float x2 = topRight.x + point.y / m2;
+//
+//    float width = x2 - x1;
+//    
+//    Point2f relPoint = Point2f((point.x - x1)/width, 1.0f - ((point.y - topLeft.y)/screenHeight));
     //Point2f relPoint = Point2f((point.x - topLeft.x)/screenWidth, 1.0f - ((point.y - topLeft.y)/screenHeight));
+    
+    Point2f relPoint = transformedPoints[0];
     return relPoint;
 }
 
@@ -207,11 +212,8 @@ void detectQuad() {
         blurBlack, \
         cannyBlack;
         
-        // read webcam
         stream1.read(cameraFrame);
-//        namedWindow( "Original");
-//        imshow( "Original", cameraFrame);
-        
+
         cvtColor(cameraFrame, gray, CV_BGR2GRAY); // greyscale
         
         threshold( gray, threshBlack, 50, 255, THRESH_BINARY); //img in 1 or 0
@@ -219,9 +221,6 @@ void detectQuad() {
         blur( threshBlack, blurBlack, Size(5,5) ); // odd number or 3x3
         
         Canny( blurBlack, cannyBlack, cutBlack, cutBlack*3, 3 ); //* 3 or 2
-        
-//        namedWindow( "ThreshBlack");
-//        imshow( "ThreshBlack", cannyBlack);
         
         vector<vector<Point> > contoursBlack;
         
@@ -267,7 +266,6 @@ void detectQuad() {
         }
         
         //display
-        
         Scalar color(0, 255, 255 );
         
         for( int i = 0; i< contoursBlack.size(); i++ ){
@@ -279,13 +277,11 @@ void detectQuad() {
         namedWindow( "BoxesBlack", CV_WINDOW_AUTOSIZE );
         imshow( "BoxesBlack", boxesBlack);
         
-        
+        // send data to game
         sendData();
 
         if (waitKey(30) >= 0)
             break;
-        
-
     }
 
 }
